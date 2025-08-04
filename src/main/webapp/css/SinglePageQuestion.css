@@ -1,0 +1,140 @@
+body {
+font-family: "Raleway", sans-serif;
+background-color: #1B1616;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+}
+
+.quiz-container {
+width: 80%;
+max-width: 800px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 15px 15px 0;
+box-sizing: border-box;
+margin: 30px 0;
+background-color: #333;
+color: #524f52;
+}
+
+h1, h2 {
+text-align: center;
+color: #f5eaec;
+}
+
+.question-html, .question {
+font-size: 1.2em;
+margin: 20px 0;
+color: #f5eaec;
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+width: 100%;
+}
+
+form {
+margin-top: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.response {
+display: flex;
+flex-direction: column;
+align-items: stretch;
+}
+
+.response input[type="text"] {
+padding: 15px;
+margin: 10px 0;
+width: 100%;
+border-radius: 5px;
+font-size: 1em;
+box-sizing: border-box;
+font-family: 'Raleway', Arial, sans-serif;
+border: 2px solid #ccc;
+}
+
+.response input[type="text"]:focus {
+border-color: #b2a8b1;
+outline: none;
+}
+
+img{
+border-radius: 5px;
+border: 1px solid #9b9292;
+}
+
+ul.answers {
+list-style-type: none;
+padding: 0;
+}
+
+ul.answers li {
+margin: 10px 0;
+}
+
+input[type="radio"], input[type="checkbox"] {
+margin-right: 10px;
+}
+
+label {
+font-size: 1em;
+}
+
+button.btn {
+display: block;
+padding: 15px;
+background-color: #17A6E8;
+border: none;
+color: #f5eaec;
+font-size: 1em;
+cursor: pointer;
+border-radius: 10px;
+margin-top: 20px;
+}
+
+button.btn:hover {
+background-color: #91868e;
+}
+
+.image-question img {
+max-width: 100%;
+height: auto;
+margin-bottom: 20px;
+}
+
+.quiz {
+display: flex;
+justify-content: space-between;
+margin-top: 20px;
+}
+
+.questions, .answers {
+width: 50%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.marcxena, .answer {
+padding: 10px;
+border: 1px solid #f5eaec;
+border-radius: 5px;
+margin: 5px 0;
+cursor: pointer;
+user-select: none;
+width: 80%;
+}
+
+.quiz{
+width: 100%;
+}

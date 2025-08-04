@@ -1,0 +1,152 @@
+body {
+font-family: "Raleway", sans-serif;
+background-color: #1B1616;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+}
+
+.quiz-container {
+width: 80%;
+max-width: 800px;
+margin: 50px auto;
+background-color: #1B1616;
+padding: 20px;
+border-radius: 10px;
+}
+
+.singleKitxva {
+box-shadow: 15px 15px 0;
+width: 100%;
+box-sizing: border-box;
+padding: 20px;
+margin: 30px 0;
+background-color: #333;
+color: #fe9ce3;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+h1, h2 {
+text-align: center;
+color: #f5eaec;
+}
+
+.question-html, .question {
+font-size: 1.2em;
+margin: 20px 0;
+color: #f5eaec;
+display: flex;
+justify-content: center;
+flex-direction: column;
+text-align: center;
+width: 100%;
+}
+
+form {
+margin-top: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+}
+
+.response {
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+}
+
+.response input[type="text"] {
+width: 60%;
+padding: 10px;
+margin: 10px 0;
+border: 1px solid #f5eaec;
+border-radius: 5px;
+font-size: 1em;
+}
+
+ul.answers {
+list-style-type: none;
+padding: 0;
+width: 100%;
+text-align: center;
+}
+
+ul.answers li {
+margin: 10px 0;
+color: #F5EAEC;
+}
+
+input[type="radio"], input[type="checkbox"] {
+margin-right: 10px;
+}
+
+label {
+font-size: 1em;
+}
+
+button.btn {
+display: block;
+width: 60%;
+padding: 10px;
+background-color: #17A6E8;
+border: none;
+color: #f5eaec;
+font-size: 1em;
+cursor: pointer;
+border-radius: 5px;
+margin-top: 20px;
+}
+
+button.btn:hover {
+background-color: #fe9ce3;
+}
+
+.image-question img {
+max-width: 100%;
+height: auto;
+margin-bottom: 20px;
+}
+
+.quiz {
+display: flex;
+justify-content: space-between;
+margin-top: 20px;
+}
+
+.questions, .answers {
+width: 48%;
+}
+
+.marcxena, .answer {
+padding: 10px;
+border: 1px solid #f5eaec;
+border-radius: 5px;
+margin: 5px 0;
+cursor: pointer;
+color: #F5EAEC;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+text-align: center;
+}
+
+button {
+display: block;
+width: 30%;
+padding: 10px;
+background-color: #fe9ce3;
+border: none;
+color: #f5eaec;
+font-size: 1em;
+cursor: pointer;
+border-radius: 5px;
+margin-top: 20px;
+}
+
+button:hover {
+background-color: #17A6E8;
+}

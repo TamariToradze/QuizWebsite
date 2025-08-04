@@ -1,0 +1,176 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background-color: #1B1616;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+}
+header .nav-bar {
+    display: flex;
+    align-items: center;
+}
+header .logo-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+}
+header .logo-area h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: white;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+header .logo-area .slogan {
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    color: #f2f2f2;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+header img {
+    width: 70px;
+}
+header ul li {
+    display: inline-block;
+    font-weight: bold;
+    margin: 0 10px;
+}
+header ul li a {
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+header ul li a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+header ul li a:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+header ul li:nth-child(1) a {
+    color: #17A6E8;
+}
+header ul li:nth-child(1) a:hover {
+    color: #17A6E8;
+}
+header ul li:nth-child(1) a:before {
+    background-color: #17A6E8;
+}
+header ul li:nth-child(2) a {
+    color: #fe9ce3;
+}
+header ul li:nth-child(2) a:hover {
+    color: #fe9ce3;
+}
+header ul li:nth-child(2) a:before {
+    background-color: #fe9ce3;
+}
+header ul li:nth-child(3) a {
+    color: #fc6916;
+}
+header ul li:nth-child(3) a:hover {
+    color: #fc6916;
+}
+header ul li:nth-child(3) a:before {
+    background-color: #fc6916;
+}
+
+.settings-container {
+    position: relative;
+}
+
+.settings-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.settings-btn:hover {
+    color: #fe9ce3;
+}
+
+.settings-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 270px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.settings-menu.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.menu-content {
+    padding: 10px 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    color: #24292f;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item:hover {
+    background-color: #f6f8fa;
+    border-radius: 6px;
+}
+
+.menu-item i {
+    margin-right: 12px;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    color: #24292f;
+}
+
+.menu-item:hover i {
+    color: #24292f;
+}

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QuizMaster</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700|Playfair+Display:700" rel="stylesheet">
+    <style>
+        :root {
+            --hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
+            --returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+            --dark-bg: rgba(51, 51, 51, 0.9);
+            --dark-border: rgba(128, 128, 128, 0.5);
+            --light-bg: rgba(255, 255, 255, 0.9);
+            --light-border: rgba(128, 128, 128, 0.2);
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1a1a1a;
+        }
+
+        body.dark-mode .nav-buttons .nav-button {
+            background-color: var(--dark-bg);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .nav-buttons .nav-button:hover {
+            background-color: rgba(51, 51, 51, 1);
+            border-color: rgba(128, 128, 128, 0.8);
+        }
+
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #ffffff;
+        }
+
+        body.light-mode .nav-buttons .nav-button {
+            background-color: var(--light-bg);
+            border-color: var(--light-border);
+            color: #333;
+        }
+
+        body.light-mode .nav-buttons .nav-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+            border-color: rgba(128, 128, 128, 0.4);
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            background-color: rgba(51, 51, 51, 0.9);
+            border: 2px solid rgba(128, 128, 128, 0.5);
+            border-radius: 17px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 17px;
+            transition: all 0.3s ease;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle input:checked + .slider {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .theme-toggle input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        body {
+            margin: 40px 0;
+            font-family: "Raleway";
+            font-size: 14px;
+            font-weight: 500;
+            background-image: url('https://wallpaper.dog/large/20419572.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            -webkit-font-smoothing: antialiased;
+            transition: background-image 0.3s ease;
+        }
+
+        body.light-mode {
+            background-image: url('https://i.pinimg.com/736x/77/62/47/776247f038d2bdc9b240a4d08f8670ca.jpg');
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        body.light-mode .top-bar {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar h1 {
+            font-family: "Playfair Display";
+            font-size: 32px;
+            color: white;
+            margin: 0;
+        }
+
+        .top-bar p {
+            color: white;
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            position: absolute;
+            top: 20px;
+            right: 120px;
+            z-index: 1000;
+        }
+
+        .nav-buttons .nav-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: rgba(51, 51, 51, 0.9);
+            border: 2px solid rgba(128, 128, 128, 0.5);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-buttons .nav-button:hover {
+            background-color: rgba(51, 51, 51, 1);
+            border-color: rgba(128, 128, 128, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Category buttons at bottom */
+        .category-buttons {
+            display: flex;
+            gap: 15px;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .category-buttons .category-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(51, 51, 51, 0.9);
+            border: 2px solid rgba(128, 128, 128, 0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .category-buttons .category-button:hover {
+            background-color: rgba(51, 51, 51, 1);
+            border-color: rgba(128, 128, 128, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .nav-buttons .category-button span {
+            font-size: 20px;
+            color: white;
+        }
+
+        .nav-buttons .category-button p {
+            color: white;
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .title {
+            font-family: "Raleway";
+            font-size: 24px;
+            font-weight: 700;
+            color: #5D4037;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .container {
+            padding: 40px 80px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 80px;
+        }
+
+        .card-wrap {
+            margin: 10px;
+            transform: perspective(800px);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card {
+            position: relative;
+            flex: 0 0 240px;
+            width: 240px;
+            height: 320px;
+            background-color: #333;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow:
+                rgba(0, 0, 0, 0.66) 0 30px 60px 0,
+                inset #333 0 0 0 5px,
+                inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
+            transition: 1s var(--returnEasing);
+        }
+
+        .card-bg {
+            opacity: 0.5;
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            transition:
+                1s var(--returnEasing),
+                opacity 5s 1s var(--returnEasing);
+            pointer-events: none;
+        }
+
+        .card-info {
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            color: #fff;
+            transform: translateY(40%);
+            transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        .card-info h1 {
+            font-family: "Playfair Display";
+            font-size: 36px;
+            font-weight: 700;
+            text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
+            margin: 0 0 20px 0;
+        }
+
+        .card-info p {
+            opacity: 0;
+            text-shadow: rgba(0, 0, 0, 1) 0 2px 3px;
+            transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        .card-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            background-color: #3498db;
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-button:hover {
+            background-color: #2e6da4;
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-info:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+            background-blend-mode: overlay;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: 5s 1s var(--returnEasing);
+        }
+
+        .card-wrap:hover .card-info {
+            transform: translateY(0);
+        }
+
+        .card-wrap:hover .card-info p {
+            opacity: 1;
+        }
+
+        .card-wrap:hover .card-info,
+        .card-wrap:hover .card-info p {
+            transition: 0.6s var(--hoverEasing);
+        }
+
+        .card-wrap:hover .card-info:after {
+            opacity: 1;
+            transform: translateY(0);
+            transition: 5s var(--hoverEasing);
+        }
+
+        .card-wrap:hover .card-bg {
+            opacity: 0.8;
+            transition:
+                0.6s var(--hoverEasing),
+                opacity 5s var(--hoverEasing);
+        }
+
+        .card-wrap:hover .card {
+            transition:
+                0.6s var(--hoverEasing),
+                box-shadow 2s var(--hoverEasing);
+            box-shadow:
+                rgba(255, 255, 255, 0.2) 0 0 40px 5px,
+                rgba(255, 255, 255, 1) 0 0 0 1px,
+                rgba(0, 0, 0, 0.66) 0 30px 60px 0,
+                inset #333 0 0 0 5px,
+                inset rgba(255, 255, 255, 1) 0 0 0 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div>
+            <h1>QuizMaster</h1>
+            <p>Test your knowledge, challenge your mind</p>
+        </div>
+        <div class="nav-buttons">
+            <label class="theme-toggle">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+            <a href="Authorisation.jsp" class="nav-button">Login</a>
+            <a href="Registration.jsp" class="nav-button">Create Account</a>
+        </div>
+
+        <script>
+            // Theme toggle functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const body = document.body;
+
+                // Check if dark mode is preferred
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    themeToggle.checked = true;
+                    body.classList.add('dark-mode');
+                }
+
+                themeToggle.addEventListener('change', function() {
+                    body.classList.toggle('dark-mode');
+                    body.classList.toggle('light-mode');
+                });
+            });
+        </script>
+
+    </div>
+
+    <div id="app" class="container">
+        <card data-image="https://images.pexels.com/photos/3587324/pexels-photo-3587324.jpeg" category="art">
+            <template slot="header">
+                <h1>Art</h1>
+            </template>
+            <template slot="content">
+                <p>Create boldly. Feel deeply. See differently</p>
+            </template>
+        </card>
+        <card data-image="https://upload.wikimedia.org/wikipedia/commons/d/d5/Rafael_Nadal_2011_Roland_Garros_2011-crop.jpg" category="sports">
+            <template slot="header">
+                <h1>Sports</h1>
+            </template>
+            <template slot="content">
+                <p>Push limits, Play hard, Know your game.</p>
+            </template>
+        </card>
+        <card data-image="https://images.pexels.com/photos/2150/sky-space-dark-galaxy.jpg" category="science">
+            <template slot="header">
+                <h1>Science</h1>
+            </template>
+            <template slot="content">
+                <p>Question everything. Discover the unseen.</p>
+            </template>
+        </card>
+        <card data-image="https://image.tmdb.org/t/p/original/gXIuss4Ajlex0E6iJPjkSTR8Qip.jpg" category="movies">
+            <template slot="header">
+                <h1>Movies</h1>
+            </template>
+            <template slot="content">
+                <p>Live the story. Feel the moment. Love the cinema.</p>
+            </template>
+        </card>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        Vue.config.devtools = true;
+
+        Vue.component('card', {
+            template: `
+                <a :href="quizLink" class="card-wrap"
+                    @mousemove="handleMouseMove"
+                    @mouseenter="handleMouseEnter"
+                    @mouseleave="handleMouseLeave"
+                    ref="card">
+                    <div class="card"
+                        :style="cardStyle">
+                        <div class="card-bg" :style="[cardBgTransform, cardBgImage]"></div>
+                        <div class="card-info">
+                            <slot name="header"></slot>
+                            <slot name="content"></slot>
+                        </div>
+                    </div>
+                </a>`,
+            mounted() {
+                this.width = this.$refs.card.offsetWidth;
+                this.height = this.$refs.card.offsetHeight;
+            },
+            props: ['dataImage', 'category'],
+            data: () => ({
+                width: 0,
+                height: 0,
+                mouseX: 0,
+                mouseY: 0,
+                mouseLeaveDelay: null
+            }),
+            computed: {
+                quizLink() {
+                    if (this.category === 'art') {
+                        return 'artquiz.jsp';
+                    }
+                    if (this.category === 'sports') {
+                        return 'sportquiz.jsp';
+                    }
+                    if (this.category === 'movies') {
+                        return 'moviequiz.jsp';
+                    }
+                    if (this.category === 'science') {
+                        return 'sciencequiz.jsp';
+                    }
+
+                    return `quiz.jsp?category=${this.category}`;
+                },
+                mousePX() {
+                    return this.mouseX / this.width;
+                },
+                mousePY() {
+                    return this.mouseY / this.height;
+                },
+                cardStyle() {
+                    const rX = this.mousePX * 30;
+                    const rY = this.mousePY * -30;
+                    return {
+                        transform: `rotateY(${rX}deg) rotateX(${rY}deg)`
+                    };
+                },
+                cardBgTransform() {
+                    const tX = this.mousePX * -40;
+                    const tY = this.mousePY * -40;
+                    return {
+                        transform: `translateX(${tX}px) translateY(${tY}px)`
+                    }
+                },
+                cardBgImage() {
+                    return {
+                        backgroundImage: `url(${this.dataImage})`
+                    }
+                }
+            },
+            methods: {
+                handleMouseMove(e) {
+                    this.mouseX = e.pageX - this.$refs.card.offsetLeft - this.width/2;
+                    this.mouseY = e.pageY - this.$refs.card.offsetTop - this.height/2;
+                },
+                handleMouseEnter() {
+                    clearTimeout(this.mouseLeaveDelay);
+                },
+                handleMouseLeave() {
+                    this.mouseLeaveDelay = setTimeout(()=>{
+                        this.mouseX = 0;
+                        this.mouseY = 0;
+                    }, 1000);
+                }
+            }
+        });
+
+        const app = new Vue({
+            el: '#app'
+        });
+    </script>
+    </body>
+    </html>

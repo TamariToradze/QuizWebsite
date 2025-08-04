@@ -1,0 +1,122 @@
+body {
+    font-family: "Raleway", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #7e7c7c;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+{
+    user-select: none;
+}
+
+.container {
+    background-color: #1B1616;
+    padding: 40px;
+    border-radius: 8px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    color: #f5eaec;
+    flex-direction: column;
+}
+table{
+    margin: 10px;
+}
+
+main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.stats{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+h1, h2 {
+    color: #f5eaec;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px;
+}
+
+thead {
+    background-color: #807d7d;
+}
+
+thead th {
+    color: #fff;
+    padding: 10px;
+}
+
+tbody td {
+    background-color: #444;
+    color: #f5eaec;
+    padding: 10px;
+    text-align: center;
+}
+
+.actions {
+    margin-top: 20px;
+}
+
+.actions a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fe9ce3;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Raleway', Arial, sans-serif;
+}
+
+.actions a:hover {
+    background-color: #f8f8f8;
+}
+
+.leaderboard{
+    margin-right: 60px;
+}
+
+.quiz{
+    color: #fafafa;
+}
+
+.user{
+    color: #ffffff;
+}
+
+.score{
+    color: #fffdfd;
+}
+
+.time-taken{
+    color: #f4f1fa;
+}
